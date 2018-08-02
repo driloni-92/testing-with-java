@@ -18,4 +18,27 @@ public class Selenium3ExampleIT {
 
     private Boolean result;
 
+    @BeforeClass
+    public static void beforeAll() {
+        startUrl = "http://www.google.co.uk/";
+        driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, 10);
+    }
+
+    @AfterClass
+    public static void afterAll() {
+        driver.close();
+        driver.quit();
+    }
+
+    @Before
+    public void beforeEach() {
+        driver.get(startUrl);
+    }
+
+    @Test
+    public void checkPageTitleOnInit() {
+        assertEquals("Google", driver.getTitle());
+    }
+
 }
